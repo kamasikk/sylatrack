@@ -2,3 +2,4 @@ fitmind-db.json
 .env
 .idea/
 node_modules/
+.netlify/

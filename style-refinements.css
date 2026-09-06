@@ -35,6 +35,11 @@ button:not(:disabled):active {
   box-shadow: 0 6px 16px rgba(0, 0, 0, .12);
 }
 
+/* The navigation is private and must never be shown on the sign-in screen. */
+.auth-mode .sidebar { display: none; }
+.auth-mode .app-shell { display: block; }
+.auth-mode #app { max-width: none; margin: 0; padding: 0; }
+
 .ai-msg .coach-paragraph {
   margin: 0 0 9px;
 }
