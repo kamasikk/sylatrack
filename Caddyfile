@@ -1,0 +1,5 @@
+# Замініть fitmind.example.com на свій домен.
+# Caddy автоматично видасть і оновлюватиме сертифікат HTTPS.
+fitmind.example.com {
+  reverse_proxy 127.0.0.1:4173
+}

@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>FitMind — розумний трекер тренувань</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="style-refinements.css">
+</head>
+<body>
+  <div id="toast" role="status"></div>
+  <div class="app-shell">
+    <aside class="sidebar"><a class="logo" href="#home"><i>F</i><span>FIT<span>MIND</span><small>SMART TRAINING</small></span></a>
+      <nav id="nav"><button data-view="home" class="active">⌂ <span>Головна</span></button><button data-view="workouts">◷ <span>Тренування</span></button><button data-view="recovery">◉ <span>AI Recovery</span></button><button data-view="calendar">▦ <span>Календар</span></button><button data-view="exercises">◇ <span>Вправи</span></button><button data-view="coach">✦ <span>AI-тренер</span></button></nav>
+    </aside>
+    <main id="app"></main>
+  </div>
+  <dialog id="modal"></dialog>
+  <div hidden aria-hidden="true"><button id="export-btn"></button><input id="import-file" type="file"><button id="reset-btn"></button></div>
+  <script type="module" src="app-fixed.js"></script>
+</body>
+</html>

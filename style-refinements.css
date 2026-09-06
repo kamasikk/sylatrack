@@ -1,0 +1,175 @@
+/* Невеликі візуальні покращення поверх основного стилю. */
+button, input, select {
+  transition: border-color .18s ease, background-color .18s ease, box-shadow .18s ease, transform .18s ease;
+}
+
+button:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 2px solid var(--lime);
+  outline-offset: 3px;
+}
+
+button:not(:disabled):active {
+  transform: translateY(1px);
+}
+
+.open-workout {
+  border-radius: 10px;
+  padding-left: 8px !important;
+  padding-right: 8px !important;
+}
+
+.delete-workout:hover, .remove-exercise:hover, .remove-set:hover, .close:hover {
+  color: #fff;
+  background: #58302d;
+}
+
+.chat {
+  height: clamp(310px, 48vh, 470px);
+  padding-right: 5px;
+  scrollbar-color: #51613f transparent;
+}
+
+.ai-msg, .user-msg {
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, .12);
+}
+
+.ai-msg .coach-paragraph {
+  margin: 0 0 9px;
+}
+
+.ai-msg .coach-paragraph:last-child {
+  margin-bottom: 0;
+}
+
+.coach-list {
+  margin: 7px 0 0;
+  padding-left: 19px;
+}
+
+.coach-list li + li {
+  margin-top: 4px;
+}
+
+#coach-form .primary:disabled {
+  cursor: wait;
+  filter: saturate(.55);
+  opacity: .72;
+}
+
+.exercise-editor {
+  background: linear-gradient(135deg, rgba(37, 50, 35, .36), rgba(20, 25, 28, .76));
+}
+
+.category-tabs button:hover:not(.active) {
+  background: #2c3836;
+  border-color: #637451;
+}
+
+.input-hint {
+  display: block;
+  margin-top: -2px;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.favorite-btn {
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
+  border: 1px solid #3a4745;
+  border-radius: 10px;
+  background: #1a2221;
+  color: #b8c5bf;
+  font-size: 19px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.favorite-btn:hover, .is-favorite .favorite-btn {
+  border-color: #98c84a;
+  background: #30451e;
+  color: var(--lime);
+}
+
+.is-favorite {
+  border-color: #596e3c !important;
+  background: linear-gradient(110deg, #1d291a, #151b1d) !important;
+}
+
+.coach-quota {
+  display: inline-block;
+  margin: 14px 0 -3px !important;
+  padding: 7px 10px;
+  border: 1px solid #536640;
+  border-radius: 8px;
+  background: rgba(13, 18, 13, .34);
+  color: #cad8c2 !important;
+  font-size: 12px;
+}
+
+.coach-quota b { color: var(--lime); }
+
+.body-recovery {
+  display: grid;
+  grid-template-columns: minmax(220px, 1fr) minmax(210px, 340px);
+  align-items: center;
+  gap: 26px;
+  margin-bottom: 17px;
+  overflow: hidden;
+  background: linear-gradient(115deg, #172017, #14191c 68%);
+}
+
+.body-recovery h2 { margin-bottom: 7px; }
+
+.body-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 16px;
+}
+
+.body-legend span {
+  padding: 5px 8px;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+  font-size: 10px;
+}
+
+.body-legend .ready { color: #62df85; }
+.body-legend .almost { color: var(--lime); }
+.body-legend .caution { color: #eed84e; }
+.body-legend .tired { color: var(--red); }
+
+.body-map {
+  display: block;
+  width: min(100%, 240px);
+  justify-self: center;
+  filter: drop-shadow(0 12px 28px rgba(0, 0, 0, .26));
+}
+
+.body-head { fill: #303b3e; stroke: #586461; stroke-width: 2; }
+.body-part { stroke: #0d1213; stroke-width: 3; transition: fill .22s ease, filter .22s ease; cursor: help; }
+.body-part:hover { filter: brightness(1.22); }
+.body-part.ready { fill: #45c96d; }
+.body-part.almost { fill: #b9ef3e; }
+.body-part.caution { fill: #e7d547; }
+.body-part.rest { fill: #ffa34a; }
+.body-part.tired { fill: #ed5c58; }
+
+@media (max-width: 760px) {
+  .body-recovery { grid-template-columns: 1fr; }
+  .body-map { width: 205px; }
+}
+
+@media (max-width: 640px) {
+  .chat { height: 360px; }
+  #coach-form { flex-direction: column; }
+  #coach-form .primary { width: 100%; }
+  .ai-msg, .user-msg { max-width: 92%; }
+  .editor-head { align-items: stretch; flex-direction: column; }
+  .remove-exercise { position: static; align-self: flex-end; }
+}

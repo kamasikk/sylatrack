@@ -1,0 +1,17 @@
+export const muscleProfiles = {
+  chest:{label:'Груди',hours:60}, back:{label:'Спина',hours:54}, traps:{label:'Трапеції',hours:46}, frontDelts:{label:'Передня дельта',hours:48}, sideDelts:{label:'Середня дельта',hours:44}, rearDelts:{label:'Задня дельта',hours:44}, biceps:{label:'Біцепс',hours:42}, triceps:{label:'Трицепс',hours:42}, forearms:{label:'Передпліччя',hours:36}, quads:{label:'Квадрицепси',hours:66}, hamstrings:{label:'Біцепс стегна',hours:60}, glutes:{label:'Сідниці',hours:60}, calves:{label:'Литки',hours:36}, core:{label:'Прес',hours:32}, lowerBack:{label:'Поперек',hours:48}, fullBody:{label:'Все тіло',hours:40}
+};
+export const volumeOf = set => Number(set.weight||0) * Number(set.reps||0);
+export const band = score => score>=90?['Готові','green']:score>=70?['Майже готові','lime']:score>=50?['Частково відновлені','yellow']:score>=30?['Потрібен відпочинок','orange']:['Висока втома','red'];
+const ago = (date, now) => Math.max(0,(now-new Date(date))/36e5);
+const allVolume = w => (w.exercises||[]).reduce((a,e)=>a+(e.sets||[]).reduce((b,s)=>b+volumeOf(s),0),0);
+const fatigueOf = exercise => { const sets=(exercise.sets||[]).length, volume=(exercise.sets||[]).reduce((sum,set)=>sum+volumeOf(set),0); return Math.min(62,6+sets*8+Math.min(16,Math.sqrt(Math.max(0,volume))*.28)); };
+export function analyzeRecovery(workouts, now=new Date()) {
+  const muscles=Object.fromEntries(Object.entries(muscleProfiles).map(([key,p])=>[key,{key,...p,score:100,volume:0,last:null}]));
+  workouts.forEach(w=>{const h=ago(w.completedAt,now);if(h>336)return;(w.exercises||[]).forEach(e=>{const vol=(e.sets||[]).reduce((sum,s)=>sum+volumeOf(s),0),fatigue=fatigueOf(e);(e.muscles||[]).forEach(key=>{const m=muscles[key];if(!m)return;const remainingFatigue=Math.max(0,1-h/m.hours);m.score=Math.max(0,m.score-fatigue*remainingFatigue);m.volume+=vol*Math.exp(-h/168);if(!m.last||new Date(w.completedAt)>new Date(m.last))m.last=w.completedAt;});});});
+  const list=Object.values(muscles).map(m=>({...m,score:Math.round(m.score),band:band(Math.round(m.score))})).sort((a,b)=>a.score-b.score);
+  const week=workouts.filter(w=>ago(w.completedAt,now)<=168).reduce((s,w)=>s+allVolume(w),0), previous=workouts.filter(w=>{const h=ago(w.completedAt,now);return h>168&&h<=336}).reduce((s,w)=>s+allVolume(w),0);
+  const average=Math.round(list.reduce((s,m)=>s+m.score,0)/list.length), active=list.filter(m=>m.last&&ago(m.last,now)<m.hours), activeAverage=active.length?active.reduce((s,m)=>s+m.score,0)/active.length:100, readiness=Math.round(average*.45+activeAverage*.55), change=previous?Math.round((week/previous-1)*100):null;
+  return {muscles:list,readiness,week,previous,change,ready:list.filter(m=>m.score>=70).sort((a,b)=>b.score-a.score),tired:list.filter(m=>m.score<50)};
+}
+export function insights(r, workouts){const messages=[];if(r.ready.length)messages.push({type:'good',text:`Сьогодні найкраще тренувати: ${r.ready.slice(0,3).map(m=>m.label.toLowerCase()).join(', ')}.`});if(r.tired.length)messages.push({type:'warn',text:`Не рекомендуємо важке навантаження: ${r.tired.map(m=>m.label.toLowerCase()).join(', ')}.`});if(r.change>30)messages.push({type:'warn',text:`Тижневий обсяг зріс на ${r.change}%. Залиши 1–2 повтори в запасі.`});const recent=workouts.filter(w=>ago(w.completedAt,new Date())<72);if(recent.length>=4)messages.push({type:'warn',text:'4 тренування за 72 години: розглянь легкий день або відпочинок.'});return messages;}

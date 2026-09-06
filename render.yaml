@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: fitmind
+    runtime: node
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SECURE_COOKIES
+        value: "true"

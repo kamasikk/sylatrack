@@ -1,0 +1,13 @@
+{
+  "name": "fitmind",
+  "version": "1.0.0",
+  "private": true,
+  "description": "FitMind personal training tracker",
+  "scripts": {
+    "start": "node server.js",
+    "check": "node --check server.js && node --check app-fixed.js && node --check recovery-engine.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
