@@ -28,3 +28,7 @@ node server.js
 5. У Firebase Authentication → Settings → Authorized domains додай домен Netlify, наприклад `твій-сайт.netlify.app`.
 
 Gemini-ключ не потрапляє у браузер: його читає лише Netlify Function `netlify/functions/coach.mjs`. Не додавай `.env` або ключі у GitHub.
+
+для входу 
+почта kamasik555@gmail.com
+пароль 12112010
