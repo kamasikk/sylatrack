@@ -6,12 +6,12 @@ import { getFirestore, doc, getDoc, setDoc, updateDoc } from 'https://www.gstati
 // Firebase Web configuration is public by design. It identifies this app;
 // access to every user document is enforced by the Firestore rules.
 const firebaseConfig = {
-  apiKey: 'AIzaSyCM_G4B97AeKt37P5ePDSdaR47gCDM',
-  authDomain: 'fitmind-f9375.firebaseapp.com',
-  projectId: 'fitmind-f9375',
-  storageBucket: 'fitmind-f9375.firebasestorage.app',
-  messagingSenderId: '104533087149',
-  appId: '1:104533087149:web:222c518d2ed5ddcfa60724'
+  apiKey: "AIzaSyCM_Dyg_G4B97AeKt37P5ePDSdaR47gCDM",
+  authDomain: "fitmind-f9375.firebaseapp.com",
+  projectId: "fitmind-f9375",
+  storageBucket: "fitmind-f9375.firebasestorage.app",
+  messagingSenderId: "104533087149",
+  appId: "1:104533087149:web:222c518d2ed5ddcfa60724"
 };
 const firebaseApp = initializeApp(firebaseConfig);
 const firebaseAuth = getAuth(firebaseApp);
