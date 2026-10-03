@@ -178,3 +178,62 @@ button:not(:disabled):active {
   .editor-head { align-items: stretch; flex-direction: column; }
   .remove-exercise { position: static; align-self: flex-end; }
 }
+
+.template-library {
+  margin-bottom: 18px;
+  padding: 21px;
+  border: 1px solid #3e5c2b;
+  border-radius: 14px;
+  background: linear-gradient(120deg, rgba(36, 58, 29, .9), rgba(20, 27, 27, .96));
+}
+
+.template-library .card-head { align-items: flex-start; }
+.template-library .card-head .sub { margin-top: 6px; }
+.template-count, .template-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 9px;
+  border: 1px solid #5b7938;
+  border-radius: 999px;
+  color: var(--lime);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.template-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.template-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid #33413c;
+  border-radius: 12px;
+  background: rgba(17, 23, 24, .82);
+}
+
+.template-card-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.template-duration { color: #a8b3ad; font-size: 11px; }
+.template-card h3 { margin: 13px 0 4px; font-size: 19px; }
+.template-card > p { min-height: 34px; margin: 0 0 11px; color: #aeb9b3; font-size: 12px; line-height: 1.45; }
+.template-exercises { display: grid; gap: 0; margin: 0 0 15px; padding: 0; list-style: none; }
+.template-exercises li { display: flex; justify-content: space-between; gap: 10px; padding: 7px 0; border-top: 1px solid #2b3534; color: #e1e9e4; font-size: 12px; }
+.template-exercises li:first-child { border-top: 0; }
+.template-exercises li > span { display: grid; gap: 2px; min-width: 0; }
+.template-exercises em { color: #82928a; font-size: 10px; font-style: normal; }
+.template-exercises small { color: #94a19a; white-space: nowrap; }
+.template-card .primary { width: 100%; margin-top: auto; }
+
+@media (max-width: 760px) {
+  .template-grid { grid-template-columns: 1fr; }
+  .template-library { padding: 16px; }
+}
+
+@media (max-width: 460px) {
+  .template-exercises li { align-items: flex-start; flex-direction: column; gap: 3px; }
+}
